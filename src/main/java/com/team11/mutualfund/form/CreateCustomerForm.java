@@ -1,55 +1,55 @@
 package com.team11.mutualfund.form;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.validation.DirectFieldBindingResult;
-import org.springframework.validation.Errors;
-
-import javax.validation.constraints.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 import static com.team11.mutualfund.utils.Constant.*;
-
 
 public class CreateCustomerForm {
 
     @Size(min = 1, max = 20, message = USERNAMELENGTH)
-    private String userName;
+    private String username;
+
 
     @Size(min = 1, max = 20, message = PASSWORDLENGTH)
     private String password;
 
     @Size(min = 1, max = 20, message = FIRSTNAMELENGTH)
-    private String firstName;
-    
+    private String fname;
+
     @Size(min = 1, max = 20, message = LASTNAMELENGTH)
-    private String lastName;
-    
+    private String lname;
+
+    @Size(min = 1, max = 30, message = EMAILLENGTH)
+    private String email;
+
     @Size(min = 1, max = 50, message = ADDRESSLENGTH)
     private String address;
 
     @Size(min = 1, max = 20, message = CITYLENGTH)
     private String city;
 
-    @Size(min = 1, max = 20, message = STATELENGTH)
+    @Size(min = 2, max = 20, message = STATELENGTH)
     private String state;
-    
+
     @Size(min = 5, max = 6, message = ZIPLENGTH)
     private String zip;
 
-    public String sanitize(String s) {
-        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    @Size(min = 1, max = 20, message = CASHLENGTH)
+    private String cash;
+
+    // getters and setters
+    public String getUsername() {
+        return username;
     }
 
-    public Errors getValidationErrors() {
-        Errors errors = new DirectFieldBindingResult(this, "customerRegisterForm");
-        return errors;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = sanitize(userName);
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -57,39 +57,31 @@ public class CreateCustomerForm {
     }
 
     public void setPassword(String password) {
-        this.password = sanitize(password);
+        this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFname() {
+        return fname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = sanitize(firstName);
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLname() {
+        return lname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = sanitize(lastName);
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
-    public String getCity() {
-        return city;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCity(String city) {
-        this.city = sanitize(city);
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = sanitize(state);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -97,7 +89,23 @@ public class CreateCustomerForm {
     }
 
     public void setAddress(String address) {
-        this.address = sanitize(address);
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getZip() {
@@ -105,6 +113,14 @@ public class CreateCustomerForm {
     }
 
     public void setZip(String zip) {
-        this.zip = sanitize(zip);
+        this.zip = zip;
+    }
+
+    public String getCash() {
+        return cash;
+    }
+
+    public void setCash(String cash) {
+        this.cash = cash;
     }
 }

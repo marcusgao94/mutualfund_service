@@ -1,34 +1,12 @@
 package com.team11.mutualfund.controller;
 
 
-import com.team11.mutualfund.form.SearchForm;
-import com.team11.mutualfund.model.User;
-
 import com.team11.mutualfund.service.*;
-import com.team11.mutualfund.utils.Positionvalue;
-import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
-import static com.team11.mutualfund.utils.Constant.*;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import java.util.List;
 
 @Controller
 @SessionAttributes(value = {"customerList", "employeeList"})

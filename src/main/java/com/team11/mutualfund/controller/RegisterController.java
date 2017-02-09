@@ -1,5 +1,6 @@
 package com.team11.mutualfund.controller;
 
+import com.team11.mutualfund.form.CreateCustomerForm;
 import com.team11.mutualfund.model.User;
 import com.team11.mutualfund.service.UserService;
 import com.team11.mutualfund.response.BasicResponse;
@@ -13,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.DoubleSummaryStatistics;
+
 import static com.team11.mutualfund.utils.Constant.*;
 
 @RestController
@@ -23,8 +28,9 @@ public class RegisterController {
 
     @PostMapping(value = "/createCustomerAccount")
     public BasicResponse createCustomer(HttpSession session,
-                                        @Valid @RequestBody User user, BindingResult result) {
+                                        @Valid @RequestBody CreateCustomerForm ccf, BindingResult result) {
         BasicResponse br = new BasicResponse();
+        /*
         if (!checkLogin(session)) {
             br.setMessage(NOTLOGIN);
             return br;
@@ -33,15 +39,25 @@ public class RegisterController {
             br.setMessage(NOTEMPLOYEE);
             return br;
         }
+        */
         // validate form
         if (result.hasErrors()) {
             br.setMessage(ILLEGALINPUT);
             return br;
         }
+        User user = new User(ccf);
         try {
-            user.setRole("customer");
+            double cash = Double.valueOf(ccf.getCash());
+            /*
+            String[] str = ccf.getCash().split(".");
+            if (str.length == 2 && str[1].length() > 2) {
+                br.setMessage(ILLEGALINPUT);
+                return br;
+            }
+            */
+            user.setCash(cash);
             userService.createCustomer(user);
-        } catch (DataIntegrityViolationException e) {
+        } catch (NumberFormatException | DataIntegrityViolationException e) {
             br.setMessage(ILLEGALINPUT);
             return br;
         }

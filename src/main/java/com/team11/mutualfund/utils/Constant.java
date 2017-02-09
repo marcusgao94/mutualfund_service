@@ -20,6 +20,7 @@ public class Constant {
     public static final String ZIPLENGTH = "Length of zip must be 5 to 6";
     public static final String EMAILLENGTH = "Length of email must be 1 to 30";
     public static final String PASSWORDLENGTH = "Lenght of password must be 1 to 20";
+    public static final String CASHLENGTH = "Lenght of cash must be 1 to 20";
     public static final String INCONSISTENTPASSWORD = "Password inconsistent";
     public static final String NOCUSTOMER = "User does not exit";
 

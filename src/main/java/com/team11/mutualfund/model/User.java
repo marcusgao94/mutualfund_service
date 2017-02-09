@@ -19,49 +19,53 @@ public class User implements Serializable {
 	@GeneratedValue
 	private long id;
 
-	@Size(min = 1, max = 20, message = USERNAMELENGTH)
 	@Column(nullable = false, unique = true)
 	private String username;
 
-
-	@Size(min = 1, max = 20, message = PASSWORDLENGTH)
 	@Column(nullable = false)
 	private String password;
 
-	@Size(min = 1, max = 20, message = FIRSTNAMELENGTH)
     @Column(nullable = false)
 	private String fname;
 
-	@Size(min = 1, max = 20, message = LASTNAMELENGTH)
 	@Column(nullable = false)
 	private String lname;
 
-	@Size(min = 1, max = 30, message = EMAILLENGTH)
 	@Column(nullable = false)
 	private String email;
 
-	@Size(min = 1, max = 50, message = ADDRESSLENGTH)
 	@Column(nullable = false)
 	private String address;
 
-	@Size(min = 1, max = 20, message = CITYLENGTH)
 	@Column(nullable = false)
 	private String city;
 
-	@Size(min = 2, max = 20, message = STATELENGTH)
 	@Column(nullable = false)
 	private String state;
 
-	@Size(min = 5, max = 6, message = ZIPLENGTH)
 	@Column(nullable = false)
 	private String zip;
 
-	@NotNull
-	@Column(nullable=false, scale = 2)
+	@Column(nullable=false, columnDefinition = "decimal(20, 2)", scale = 2)
 	private Double cash = 0d;
 
 	@Column(nullable = false)
 	private String role;
+
+
+	public User() {}
+	public User(CreateCustomerForm ccf) {
+		setUsername(ccf.getUsername());
+		setPassword(ccf.getPassword());
+		setFname(ccf.getFname());
+		setLname(ccf.getLname());
+		setEmail(ccf.getEmail());
+		setAddress(ccf.getAddress());
+		setCity(ccf.getCity());
+		setState(ccf.getState());
+		setZip(ccf.getZip());
+		setRole("Customer");
+	}
 
 	// getters and setters
 	public long getId() {
