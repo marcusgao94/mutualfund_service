@@ -25,7 +25,7 @@ public class UserDao extends AbstractDao<Long, User> {
 	public User findByIdForUpdate(Long customerId) {
         @SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
-                "select c from Customer c where c.id = :cid"
+                "select u from User u where u.id = :cid"
         )
                 .setParameter("cid", customerId)
                 .setLockMode(LockModeType.PESSIMISTIC_WRITE);
@@ -36,7 +36,7 @@ public class UserDao extends AbstractDao<Long, User> {
 	public SessionUser findUserByUserName(String userName) {
         @SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
-                "select c from Customer c where c.userName = :name"
+                "select u from User u where u.username = :name"
         )
                 .setParameter("name", userName);
         return (SessionUser) query.uniqueResult();
@@ -46,7 +46,7 @@ public class UserDao extends AbstractDao<Long, User> {
 	public User findByUserName(String userName) {
         @SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
-                "select c from Customer c where c.userName = :name"
+                "select u from User u where u.username = :name"
         )
                 .setParameter("name", userName);
         return (User) query.uniqueResult();
@@ -56,7 +56,7 @@ public class UserDao extends AbstractDao<Long, User> {
 	public User findByUserNameForUpdate(String userName) {
         @SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
-                "select c from Customer c where c.userName = :name"
+                "select u from User u where u.username = :name"
         )
                 .setParameter("name", userName)
                 .setLockMode(LockModeType.PESSIMISTIC_WRITE);
@@ -72,7 +72,7 @@ public class UserDao extends AbstractDao<Long, User> {
 	public List<User> getCustomerList() {
 		@SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
-                "select c from Customer c"
+                "select u from User u"
         );
         return (List<User>) query.list();
 	}

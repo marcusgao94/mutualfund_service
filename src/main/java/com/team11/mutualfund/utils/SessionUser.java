@@ -3,14 +3,13 @@ package com.team11.mutualfund.utils;
 
 public class SessionUser {
     private Long id;
-    private String userName;
-    private String password;
+    private String username;
     private String role;
 
     public SessionUser() {}
-    public SessionUser(Long id, String userName, String role) {
+    public SessionUser(Long id, String username, String role) {
         setId(id);
-        setUserName(userName);
+        setUsername(username);
         setRole(role);
     }
 
@@ -24,20 +23,12 @@ public class SessionUser {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRole() {

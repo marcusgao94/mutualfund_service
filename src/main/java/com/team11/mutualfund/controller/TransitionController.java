@@ -1,6 +1,5 @@
 package com.team11.mutualfund.controller;
 
-import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 import static com.team11.mutualfund.utils.Constant.SETTRANSITIONDAY;
 
@@ -43,6 +42,7 @@ public class TransitionController {
     private TransactionService transactionService;
 
 
+        /*
     @RequestMapping(value = "/transitionday", method = RequestMethod.GET)
     public String transitionDay(HttpServletRequest request,
                                RedirectAttributes redirectAttributes, Model model) {
@@ -98,5 +98,6 @@ public class TransitionController {
         model.addAttribute("success", SETTRANSITIONDAY);
         return "success";
     }
+    */
 
 }

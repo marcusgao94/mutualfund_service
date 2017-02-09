@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import static com.team11.mutualfund.controller.LoginController.checkCustomer;
-import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
 
@@ -47,6 +45,7 @@ public class ViewAccountController {
     @Autowired
     private FundService fundService;
 
+    /*
     // customer
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
     public String customerViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
@@ -69,5 +68,6 @@ public class ViewAccountController {
         model.addAttribute("customerPosition", pv);
         return "customer_viewaccount";
     }
+    */
 
 }

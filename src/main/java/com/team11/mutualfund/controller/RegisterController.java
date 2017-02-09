@@ -1,59 +1,51 @@
 package com.team11.mutualfund.controller;
 
-import com.team11.mutualfund.form.CreateCustomerForm;
 import com.team11.mutualfund.model.User;
 import com.team11.mutualfund.service.UserService;
-import com.team11.mutualfund.utils.BasicResponse;
+import com.team11.mutualfund.response.BasicResponse;
 import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
-@Controller
+@RestController
 public class RegisterController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/createCustomerAccount", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public BasicResponse createCustomer(@RequestBody User user) {
+    @PostMapping(value = "/createCustomerAccount")
+    public BasicResponse createCustomer(HttpSession session,
+                                        @Valid @RequestBody User user, BindingResult result) {
         BasicResponse br = new BasicResponse();
-        /*
-        if (sessionUser == null) {
+        if (!checkLogin(session)) {
             br.setMessage(NOTLOGIN);
             return br;
         }
-        if (!sessionUser.getRole().equals("Employee")) {
+        if (!checkEmployee(session)) {
             br.setMessage(NOTEMPLOYEE);
             return br;
         }
         // validate form
-        if (errors.hasErrors()) {
+        if (result.hasErrors()) {
             br.setMessage(ILLEGALINPUT);
             return br;
         }
-
-*/
         try {
+            user.setRole("customer");
             userService.createCustomer(user);
         } catch (DataIntegrityViolationException e) {
             br.setMessage(ILLEGALINPUT);
             return br;
         }
-        br.setMessage(user.getFname() + "was registered successfully");
+        br.setMessage(user.getFname() + " was registered successfully");
         return br;
     }
 

@@ -22,8 +22,6 @@ import javax.validation.Valid;
 
 
 
-import static com.team11.mutualfund.controller.LoginController.checkCustomer;
-import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
 import java.util.List;
@@ -39,6 +37,7 @@ public class CheckController {
     @Autowired
     private UserService userService;
 
+    /*
     @RequestMapping("/deposit_check")
     public String depositCheck(HttpServletRequest request, RedirectAttributes ra, Model model,
     						@RequestParam(value = "un", required = false) String userName) {
@@ -122,5 +121,6 @@ public class CheckController {
         model.addAttribute("success", REQUESTCHECKSUCCESS);
         return "success";
     }
+    */
 
 }

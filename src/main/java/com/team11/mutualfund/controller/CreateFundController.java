@@ -1,6 +1,5 @@
 package com.team11.mutualfund.controller;
 
-import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
 import java.util.Locale;
@@ -33,6 +32,7 @@ public class CreateFundController {
     @Autowired
     MessageSource messageSource;
 
+    /*
     @RequestMapping(value = "/employee_createfund", method = RequestMethod.GET)
     public String createFund(HttpServletRequest request,
                                RedirectAttributes redirectAttributes, Model model) {
@@ -68,5 +68,6 @@ public class CreateFundController {
             return "employee_createfund";
         }
     }
+    */
 
 }

@@ -1,4 +1,4 @@
-package com.team11.mutualfund.utils;
+package com.team11.mutualfund.response;
 
 public class BasicResponse {
     String message;

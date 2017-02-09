@@ -60,6 +60,8 @@ public class User implements Serializable {
 	@Column(nullable=false, scale = 2)
 	private Double cash = 0d;
 
+	@Column(nullable = false)
+	private String role;
 
 	// getters and setters
 	public long getId() {
@@ -148,5 +150,13 @@ public class User implements Serializable {
 
 	public void setCash(Double cash) {
 		this.cash = cash;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

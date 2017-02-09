@@ -23,7 +23,6 @@ import javax.validation.Valid;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 
 @Controller
 @SessionAttributes(value = {"customerPosition", "fundList"})
@@ -38,6 +37,7 @@ public class FundController {
     @Autowired
     private UserService userService;
 
+    /*
     @RequestMapping("buy_fund")
     public String buyFund(HttpServletRequest request, RedirectAttributes ra, Model model) {
         if (!checkCustomer(request)) {
@@ -126,4 +126,5 @@ public class FundController {
         model.addAttribute("success", "Transaction has been submitted successfully, please wait for the next transition day!");
         return "success";
     }
+    */
 }

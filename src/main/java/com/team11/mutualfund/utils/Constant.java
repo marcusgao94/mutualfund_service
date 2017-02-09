@@ -1,5 +1,8 @@
 package com.team11.mutualfund.utils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public class Constant {
 
     // login
@@ -16,12 +19,14 @@ public class Constant {
     public static final String STATELENGTH = "Length of state must be 2 to 20";
     public static final String ZIPLENGTH = "Length of zip must be 5 to 6";
     public static final String EMAILLENGTH = "Length of email must be 1 to 30";
-
     public static final String PASSWORDLENGTH = "Lenght of password must be 1 to 20";
     public static final String INCONSISTENTPASSWORD = "Password inconsistent";
-    public static final String WRONGPASSWORD = "Password is wrong";
-
     public static final String NOCUSTOMER = "User does not exit";
+
+    // login
+    public static final String LOGINERROR = "There seems to be an issue with the " +
+            "username/password combination that you entered";
+    public static final String LOGOUT = "You have been successfully logged out";
 
     public static final String NOENOUGHCASH = "Cash not enough";
     public static final String TOOLITTLEAMOUNT = "Amount must >= 0.01";
@@ -52,6 +57,16 @@ public class Constant {
 
     public static String sanitize(String s) {
         return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+
+    public static boolean checkLogin(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        return sessionUser != null;
+    }
+
+    public static boolean checkEmployee(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        return (sessionUser != null) && sessionUser.getRole().equals("Employee");
     }
 
 }
