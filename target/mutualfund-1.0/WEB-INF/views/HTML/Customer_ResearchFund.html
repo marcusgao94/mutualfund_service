@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link href="../css/searchresults.css" rel="stylesheet" type="text/css" />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+<div class="container">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+        <h2>#sessionUser's name#</h2>
+          <form>
+		    <div class="form-group">
+		      <label for="sel1">Select one fund:</label>
+		      <select class="form-control" id="sel1">
+		        <option>fundA</option>
+		        <option>fundB</option>
+		        <option>fundC</option>
+		        <option>fundD</option>
+		      </select>
+		    </div>
+		  </form>
+        
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <span itemscope itemtype="http://schema.org/Review">
+            <h3 class="panel-title" itemprop="name">Fund Info</h3>
+          </div><!--/panel-heading-->
+          <div class="panel-body" itemprop="reviewBody">
+
+            <div class="col-md-6">
+
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                    <tr>
+                       <td>FundTicker</td>
+                       <td> AC</td>
+                    </tr>
+                 <tr>
+                    <td>FundName</td>
+                    <td> FundA</td>
+                 </tr>
+                </tbody>
+              </table>
+              </div><!--table-responsive close-->
+            </div><!--col-md-6 close-->
+            <div class="col-md-6">
+
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                 <tr>
+                     <td>Average Price</td>
+                     <td> $13.6 </td>
+                 </tr>
+                 <tr>
+                     <td>Total Shares Sold</td>
+                     <td> 25</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-right">
+</div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+<!-- Graph -->
+
+<!--  chart -->
+<div class="col-md-4">
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        // Define the chart to be drawn.
+        var data = new google.visualization.arrayToDataTable([
+            ['Date', 'fundName'],
+            ['2017-01-01',  3],
+            ['2017-01-02',  6],
+            ['2017-01-03',  9],
+            ['2017-01-04',  2]
+          ]);
+
+        var options = {
+            title: 'Fund Price History',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+        // Instantiate and draw the chart.
+   var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+   chart.draw(data, options);
+  }
+
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 1030px; height: 600px;"></div>
+  </body>
+
+  </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>

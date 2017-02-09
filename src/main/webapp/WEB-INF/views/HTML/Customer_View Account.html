@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link href="../css/searchresults.css" rel="stylesheet" type="text/css" />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+<div class="container">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+        <h2>#sessionUser's name#</h2>
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <span itemscope itemtype="http://schema.org/Review">
+            <h3 class="panel-title" itemprop="name">Basic Info</h3>
+          </div><!--/panel-heading-->
+          <div class="panel-body" itemprop="reviewBody">
+
+            <div class="col-md-6">
+
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                    <tr>
+                       <td>ID</td>
+                       <td> 1234567</td>
+                    </tr>
+                 <tr>
+                    <td>Firstname</td>
+                    <td> jenifer</td>
+                 </tr>
+                 <tr>
+                    <td>Lastname</td>
+                    <td> smith</td>
+                 </tr>
+                 <tr>
+                    <td>Birthday</td>
+                    <td> 10 january 1980</td>
+                </tr>
+                </tbody>
+              </table>
+              </div><!--table-responsive close-->
+            </div><!--col-md-6 close-->
+            <div class="col-md-6">
+
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                 <tr>
+                     <td>Address</td>
+                     <td> 15213 xxxx, xxxx</td>
+                 </tr>
+                 <tr>
+                     <td>State</td>
+                     <td> PA</td>
+                  </tr>
+                  <tr>
+                     <td>Email</td>
+                     <td> jenifer123@gmail.com</td>
+                  </tr>
+                  <tr>
+                     <td>Mobile</td>
+                     <td> (+6283) 456 789</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-right">
+  <button type="button" class="btn btn-primary">Edit</button>
+</div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+<!-- Account Info -->
+              <div class="col-sm-12">
+                  <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <span itemscope itemtype="http://schema.org/Review">
+                    <h3 class="panel-title" itemprop="name">Account Info</h3>
+                  </div><!--/panel-heading-->
+                  <div class="panel-body" itemprop="reviewBody">
+                    <h4>Date of the last trading day: Jan/22/2016 </h4>
+                    <h4>Cansh balance: 1000$ </h4>
+                    <div class="col-md-6">
+
+                    <div class="table-responsive responsiv-table">
+                      <table class="table bio-table">
+                          <tbody>
+                            <tr>
+                               <td>Name of the fund</td>
+                               <td>Number</td>
+                               <td>Value</td>
+                            </tr>
+                         <tr>
+                           <td>#Fund1#</td>
+                           <td>100</td>
+                           <td>1000$</td>
+                         </tr>
+                         <tr>
+                           <td>#Fund2#</td>
+                           <td>200</td>
+                           <td>2000$</td>
+                         </tr>
+                         <tr>
+                           <td>#Fund3#</td>
+                           <td>300</td>
+                           <td>3000$</td>
+                        </tr>
+                        <tr>
+                          <td>#Fund4#</td>
+                          <td>300</td>
+                          <td>3000$</td>
+                       </tr>
+                       <tr>
+                         <td>#Fund5#</td>
+                         <td>300</td>
+                         <td>3000$</td>
+                      </tr>
+                        </tbody>
+                      </table>
+                      </div><!--table-responsive close-->
+                    </div><!--col-md-6 close-->
+<!-- pie chart -->
+<div class="col-md-4">
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        // Define the chart to be drawn.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Element');
+        data.addColumn('number', 'Percentage');
+        data.addRows([
+          ['Fund1', 0.1],
+          ['Fund2', 0.2],
+          ['Fund3', 0.3],
+          ['Fund4', 0.1],
+          ['Fund5', 0.3]
+        ]);
+        var options = {
+            title: 'My Fund Collection'
+          };
+        // Instantiate and draw the chart.
+   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+   chart.draw(data, options);
+  }
+
+    </script>
+  </head>
+  <body>
+    <div id="pieChart" style="width: 530px; height: 300px;"></div>
+  </body>
+
+  </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
