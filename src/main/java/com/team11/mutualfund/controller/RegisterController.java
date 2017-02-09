@@ -8,6 +8,8 @@ import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +21,17 @@ import javax.validation.Valid;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
-@RestController
+@Controller
 public class RegisterController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/createCustomerAccount", method = RequestMethod.POST)
-    public BasicResponse createCustomer(@ModelAttribute("user") SessionUser sessionUser,
-                                 @Valid @RequestBody User user,
-                                 Errors errors) {
+    @PostMapping(value = "/createCustomerAccount", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public BasicResponse createCustomer(@RequestBody User user) {
         BasicResponse br = new BasicResponse();
+        /*
         if (sessionUser == null) {
             br.setMessage(NOTLOGIN);
             return br;
@@ -44,6 +46,7 @@ public class RegisterController {
             return br;
         }
 
+*/
         try {
             userService.createCustomer(user);
         } catch (DataIntegrityViolationException e) {
