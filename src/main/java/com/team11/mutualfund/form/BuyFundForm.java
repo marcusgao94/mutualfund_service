@@ -9,52 +9,30 @@ import javax.validation.constraints.Size;
 
 import static com.team11.mutualfund.utils.Constant.NOENOUGHCASH;
 import static com.team11.mutualfund.utils.Constant.TOOLITTLEAMOUNT;
+import static com.team11.mutualfund.utils.Constant.sanitize;
 
 public class BuyFundForm {
 
-    @NotNull(message = "fund symbol may not be null")
-    @Size(min = 1, max = 5, message = "fund symbol length must between 1 and 5")
+    @Size(min = 1, max = 5)
     @Pattern(regexp = "^[A-Z]*$*", message = "symbol must be Capitalized alphabet")
-    private String fundTicker;
+    private String symbol;
 
-    @NotNull(message = "amount cannot be empty")
-    private Double amount;
+    @Size(min = 1, max = 20)
+    private String cashValue;
 
-    private Double available;
-
-    public Errors getValidationError() {
-        Errors errors = new DirectFieldBindingResult(this, "buyFundForm");
-        if (amount != null && amount < 0.01)
-            errors.rejectValue("amount", "", TOOLITTLEAMOUNT);
-        if (amount != null && available != null && amount > available)
-            errors.rejectValue("amount", "", NOENOUGHCASH);
-        return errors;
-    }
-    public String sanitize(String s) {
-        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    public String getSymbol() {
+        return symbol;
     }
 
-    public String getFundTicker() {
-        return fundTicker;
+    public void setSymbol(String symbol) {
+        this.symbol = sanitize(symbol);
     }
 
-    public void setFundTicker(String fundTicker) {
-        this.fundTicker = sanitize(fundTicker);
+    public String getCashValue() {
+        return cashValue;
     }
 
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public Double getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Double available) {
-        this.available = available;
+    public void setCashValue(String cashValue) {
+        this.cashValue = sanitize(cashValue);
     }
 }

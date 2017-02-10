@@ -4,32 +4,29 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static com.team11.mutualfund.utils.Constant.sanitize;
+
 public class DepositCheckForm {
 
-    @NotNull(message = "customer username cannot be empty")
-    private String userName;
+    @Size(min = 1, max = 20)
+    private String username;
 
-    @NotNull(message = "amount cannot be empty")
-    @Min(1)
-    private Double amount;
+    @Size(min = 1, max = 20)
+    private String cash;
 
-    public String sanitize(String s) {
-        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
-    }
-    
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = sanitize(userName);
+    public void setUsername(String username) {
+        this.username = sanitize(username);
     }
 
-    public Double getAmount() {
-        return amount;
+    public String getCash() {
+        return cash;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setCash(String cash) {
+        this.cash = sanitize(cash);
     }
 }

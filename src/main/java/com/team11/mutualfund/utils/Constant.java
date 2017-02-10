@@ -28,17 +28,10 @@ public class Constant {
     // fund
     public static final String CREATEFUND = "The fund was successfully created";
     public static final String NOFUND = "You don’t have any funds in your Portfolio";
-    public static final String DUPLICATEFUNDTICKER = "Fund symbol already exists";
-    public static final String NOFUNDPRICEHISTORY = "Price of this fund on this date is not set";
-    public static final String DUPLICATEFUNDPRICEHISTORY = "Price of this fund on this date " +
-            "has set";
-    public static final String NEWFUNDCREATED = "New fund has been created, please refresh";
-    public static final String WRONGTRANSITIONDAY = "Transition day must after last transition day";
+    public static final String BUYFUND = "The fund has been successfully purchased";
 
-    public static final String REQUESTCHECKSUCCESS = "Your request has been submitted successfully! "
-    		+ "Please wait for the next transition day!";
-
-    public static final String SETTRANSITIONDAY = "New transition day has been set successfully!";
+    // check
+    public static final String DEPOSITCHECK = "The check was successfully deposited";
 
     // input
     public static final String ILLEGALINPUT = "The input you provided is not valid";

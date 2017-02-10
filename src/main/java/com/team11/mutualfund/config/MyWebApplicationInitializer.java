@@ -16,7 +16,7 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(AppConfig.class);
 
-        //container.addListener(new ContextLoaderListener(rootContext));
+        container.addListener(new ContextLoaderListener(rootContext));
 
         AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
         dispatcherServlet.register(DispatcherServlet.class);

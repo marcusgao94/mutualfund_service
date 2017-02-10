@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private FundService fundService;
 
-    @PostMapping(value = "/createCustomerAccount")
+    @PostMapping("/createCustomerAccount")
     public BasicResponse createCustomer(HttpSession session,
                                         @Valid @RequestBody CreateCustomerForm ccf, BindingResult result) {
         if (!checkLogin(session))
@@ -41,6 +41,7 @@ public class UserController {
         // validate form
         if (result.hasErrors())
             return new BasicResponse(ILLEGALINPUT);
+
         User user = new User(ccf);
         try {
             double cash = Double.valueOf(ccf.getCash());
@@ -57,7 +58,7 @@ public class UserController {
         return new BasicResponse(user.getFname() + " was registered successfully");
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping("/login")
     public BasicResponse login(HttpServletRequest request,
                                @Valid @RequestBody LoginForm loginForm, BindingResult result) {
         if (result.hasErrors())
@@ -67,6 +68,7 @@ public class UserController {
             return new BasicResponse(LOGINERROR);
         if (!u.getPassword().equals(loginForm.getPassword()))
             return new BasicResponse(LOGINERROR);
+
         // if a session already exists
         HttpSession session = request.getSession(false);
         if (session != null)
@@ -90,7 +92,7 @@ public class UserController {
     }
 
     // customer view portfolio
-    @GetMapping(value = "/viewPortfolio")
+    @GetMapping("/viewPortfolio")
     public BasicResponse customerViewAccount(HttpSession session) {
         if (!checkLogin(session)) {
             return new BasicResponse(NOTLOGIN);

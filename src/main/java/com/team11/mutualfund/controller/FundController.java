@@ -14,6 +14,7 @@ import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -25,21 +26,20 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import java.text.ParseException;
+import java.util.DoubleSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.team11.mutualfund.utils.Constant.*;
 
-
-@Controller
-@SessionAttributes(value = {"customerPosition", "fundList"})
+@RestController
 public class FundController {
 
     @Autowired
     private FundService fundService;
 
     @Autowired
-    private UserService userService;
+    private TransactionService transactionService;
 
     @PostMapping("createFund")
     public BasicResponse createFund(HttpSession session,
@@ -48,6 +48,9 @@ public class FundController {
             return new BasicResponse(NOTLOGIN);
         if (!checkEmployee(session))
             return new BasicResponse(NOTEMPLOYEE);
+        if (result.hasErrors())
+            return new BasicResponse(ILLEGALINPUT);
+
         Fund fund = new Fund(cff);
         try {
             double initial_value = Double.valueOf(cff.getInitial_value());
@@ -58,30 +61,38 @@ public class FundController {
             */
             fund.setPrice(initial_value);
             fundService.createFund(fund);
-        } catch (NumberFormatException | DataIntegrityViolationException e) {
+        } catch (Exception e) {
             return new BasicResponse(ILLEGALINPUT);
         }
         return new BasicResponse(CREATEFUND);
     }
 
-    /*
-    @RequestMapping("buy_fund")
-    public String buyFund(HttpServletRequest request, RedirectAttributes ra, Model model) {
-        if (!checkCustomer(request)) {
-            return "redirect:/customer_login";
+    @PostMapping("/buyFund")
+    public BasicResponse buyFund(HttpSession session,
+                                 @Valid @RequestBody BuyFundForm bff, BindingResult result) {
+        if (!checkLogin(session))
+            return new BasicResponse(NOTLOGIN);
+        if (!checkCustomer(session))
+            return new BasicResponse(NOTCUSTOMER);
+        if (result.hasErrors())
+            return new BasicResponse(ILLEGALINPUT);
+
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        try {
+            double cash = Double.valueOf(bff.getCashValue());
+            /*
+            String[] str = ccf.getCash().split(".");
+            if (str.length == 2 && str[1].length() > 2)
+                return new BasicResponse(ILLEGALINPUT);
+            */
+            transactionService.buyFund(sessionUser.getId(), bff.getSymbol(), cash);
+        } catch (Exception e) {
+            return new BasicResponse(ILLEGALINPUT);
         }
-        SessionUser sessionUser = (SessionUser) request.getSession().getAttribute("sessionUser");
-        User customer = userService.getCustomerById(sessionUser.getId());
-        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(customer.getId());
-        List<Fund> fundList = fundService.listFund();
-        model.addAttribute("customerPosition", pv);
-        model.addAttribute("fundList", fundList);
-        BuyFundForm buyFundForm = new BuyFundForm();
-        //buyFundForm.setAvailable(customer.getCash() - customer.getPendingCashDecrease());
-        model.addAttribute("buyFundForm", buyFundForm);
-        return "buy_fund";
+        return new BasicResponse(BUYFUND);
     }
 
+    /*
     @RequestMapping(value = "buy_fund", method = RequestMethod.POST)
     public String buyFund(HttpServletRequest request, RedirectAttributes ra,
                           @ModelAttribute("customerPosition") LinkedList<Positionvalue> pv,
