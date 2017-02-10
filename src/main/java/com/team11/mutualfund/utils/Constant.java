@@ -16,15 +16,6 @@ public class Constant {
     // user
     public static final String INCONSISTENTPASSWORD = "Password inconsistent";
 
-    // cash
-    public static final String NOENOUGHCASH = "Cash not enough";
-    public static final String TOOLITTLEAMOUNT = "Amount must >= 0.01";
-
-    public static final String NOENOUGHSHARE = "Share not enough";
-    public static final String TOOLITTLESHARE = "Share must >= 0.001";
-
-    public static final String NOPOSITION = "This customer does not have this fund";
-
     // fund
     public static final String CREATEFUND = "The fund was successfully created";
     public static final String NOFUND = "You don’t have any funds in your Portfolio";
@@ -32,6 +23,9 @@ public class Constant {
 
     // check
     public static final String DEPOSITCHECK = "The check was successfully deposited";
+    public static final String REQUESTCHECK = "The check has been successfully requested";
+    public static final String NOTENOUGHREQUEST = "You don’t have sufficient funds in your account to " +
+            "cover the requested check";
 
     // input
     public static final String ILLEGALINPUT = "The input you provided is not valid";

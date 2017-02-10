@@ -13,7 +13,7 @@ import javax.persistence.RollbackException;
 import static com.team11.mutualfund.utils.Constant.*;
 
 @Service
-@Transactional
+@Transactional(isolation = Isolation.SERIALIZABLE)
 public class TransactionService {
 
     @Autowired
@@ -25,7 +25,6 @@ public class TransactionService {
     @Autowired
     private PositionDao positionDao;
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void buyFund(long uid, String symbol, double amount) throws RollbackException {
         User user = userDao.findById(uid);
         Fund fund = fundDao.findBySymbolForUpdate(symbol);
@@ -62,16 +61,11 @@ public class TransactionService {
     public void requestCheck(String userName, double amount) throws RollbackException {
         User user = userDao.findByUserNameForUpdate(userName);
         if (user == null)
-            throw new RollbackException("user username " + String.valueOf(userName) + " does not exist");
-
+            throw new RollbackException();
         // check enough cash
-        /*
-        if (user.getCash() < user.getPendingCashDecrease() + amount)
-            throw new RollbackException(NOENOUGHCASH);
-
-        user.setPendingCashDecrease(user.getPendingCashDecrease() + amount);
-        transactionDao.saveTransaction(new Transaction(user, null, REQUESTCHECK, null, amount));
-        */
+        if (user.getCash() < amount)
+            throw new RollbackException();
+        user.setCash(user.getCash() - amount);
     }
 
     public void depositCheck(String userName, double amount) throws RollbackException {
@@ -80,6 +74,5 @@ public class TransactionService {
             throw new RollbackException();
         user.setCash(user.getCash() + amount);
     }
-
 
 }

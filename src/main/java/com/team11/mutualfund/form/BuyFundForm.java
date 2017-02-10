@@ -1,14 +1,8 @@
 package com.team11.mutualfund.form;
 
-import org.springframework.validation.DirectFieldBindingResult;
-import org.springframework.validation.Errors;
-
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import static com.team11.mutualfund.utils.Constant.NOENOUGHCASH;
-import static com.team11.mutualfund.utils.Constant.TOOLITTLEAMOUNT;
 import static com.team11.mutualfund.utils.Constant.sanitize;
 
 public class BuyFundForm {

@@ -4,11 +4,15 @@ import com.team11.mutualfund.form.DepositCheckForm;
 import com.team11.mutualfund.form.RequestCheckForm;
 import com.team11.mutualfund.response.BasicResponse;
 import com.team11.mutualfund.service.TransactionService;
+import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.RollbackException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -49,32 +53,30 @@ public class CheckController {
         return new BasicResponse(DEPOSITCHECK);
     }
 
-    /*
-    @RequestMapping(value = "/request_check", method = RequestMethod.POST)
-    public String requestCheck(HttpServletRequest request, RedirectAttributes ra, Model model,
-                               @Valid RequestCheckForm requestCheckForm, BindingResult result) {
-        if (!checkCustomer(request)) {
-            return "redirect:/customer_login";
-        }
+    @PostMapping("/requestCheck")
+    public BasicResponse requestCheck(HttpSession session,
+                               @Valid @RequestBody RequestCheckForm rcf, BindingResult result) {
+        if (!checkLogin(session))
+            return new BasicResponse(NOTLOGIN);
+        if (!checkCustomer(session))
+            return new BasicResponse(NOTCUSTOMER);
         if (result.hasErrors())
-            return "request_check";
-        result.addAllErrors(requestCheckForm.getValidationErrors());
-        if (result.hasErrors())
-            return "request_check";
+            return new BasicResponse(ILLEGALINPUT);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         try {
-            transactionService.requestCheck(
-                requestCheckForm.getUserName(), requestCheckForm.getAmount());
-        } catch (RollbackException e) {
-            String message = e.getMessage();
-            if (message.startsWith("customer"))
-                result.rejectValue("customerId", "0", message);
-            else
-                result.rejectValue("amount", "1", message);
-            return "request_check";
+            double cash = Double.valueOf(rcf.getCashValue());
+            /*
+            String[] str = ccf.getCash().split(".");
+            if (str.length == 2 && str[1].length() > 2)
+                return new BasicResponse(ILLEGALINPUT);
+            */
+            transactionService.requestCheck(sessionUser.getUsername(), cash);
+        } catch (NumberFormatException e) {
+            return new BasicResponse(ILLEGALINPUT);
+        } catch (Exception e) {
+            return new BasicResponse(NOTENOUGHREQUEST);
         }
-        model.addAttribute("success", REQUESTCHECKSUCCESS);
-        return "success";
+        return new BasicResponse(REQUESTCHECK);
     }
-    */
 
 }
