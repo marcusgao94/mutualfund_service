@@ -12,33 +12,43 @@ import static com.team11.mutualfund.utils.Constant.*;
 
 public class CreateCustomerForm {
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String username;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String password;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String fname;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String lname;
 
+    @NotNull
     @Size(min = 1, max = 30)
     private String email;
 
+    @NotNull
     @Size(min = 1, max = 50)
     private String address;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String city;
 
+    @NotNull
     @Size(min = 2, max = 20)
     private String state;
 
+    @NotNull
     @Size(min = 5, max = 6)
     private String zip;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String cash;
 

@@ -14,13 +14,16 @@ import static com.team11.mutualfund.utils.Constant.sanitize;
 
 public class CreateFundForm {
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String name;
 
+    @NotNull
     @Size(min = 1, max = 5)
     @Pattern(regexp = "^[A-Z]*$*", message = "symbol must be Capitalized alphabet")
     private String symbol;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String initial_value;
 

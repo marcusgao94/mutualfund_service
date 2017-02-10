@@ -6,22 +6,13 @@ import com.team11.mutualfund.response.BasicResponse;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.RollbackException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-
-
 import static com.team11.mutualfund.utils.Constant.*;
-
-import java.util.List;
-
 
 @RestController
 public class CheckController {

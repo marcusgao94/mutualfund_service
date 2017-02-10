@@ -8,9 +8,11 @@ import static com.team11.mutualfund.utils.Constant.sanitize;
 
 public class DepositCheckForm {
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String username;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String cash;
 

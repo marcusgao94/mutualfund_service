@@ -1,6 +1,7 @@
 package com.team11.mutualfund.form;
 
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import static com.team11.mutualfund.utils.Constant.sanitize;
@@ -8,9 +9,11 @@ import static com.team11.mutualfund.utils.Constant.sanitize;
 
 public class LoginForm {
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String username;
 
+    @NotNull
     @Size(min = 1, max = 20)
     private String password;
 
