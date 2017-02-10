@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import static com.team11.mutualfund.utils.Constant.*;
@@ -100,12 +101,16 @@ public class UserController {
         if (!checkCustomer(session)) {
             return new BasicResponse(NOTCUSTOMER);
         }
+        ViewPortfolioResponse vpr = new ViewPortfolioResponse();
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        // todo: need to edit fundService
+        // set cash
+        User user = userService.getUserById(sessionUser.getId());
+        DecimalFormat df = new DecimalFormat("#0.00");
+        vpr.setCash(df.format(user.getCash()));
+        // set funds
         List<Positionvalue> funds = fundService.listPositionvalueByCustomerId(sessionUser.getId());
         if (funds.isEmpty())
             return new BasicResponse(NOFUND);
-        ViewPortfolioResponse vpr = new ViewPortfolioResponse();
         vpr.setMessage(SUCCESSACTION);
         vpr.setFunds(funds);
         return vpr;

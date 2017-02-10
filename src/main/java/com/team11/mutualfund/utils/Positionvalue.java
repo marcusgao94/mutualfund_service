@@ -4,35 +4,33 @@ import com.team11.mutualfund.model.Fund;
 
 public class Positionvalue {
 
-    private Fund fund;
+    private String name;
 
-    private Double shares;
+    private int shares;
 
-    private Double price;
+    private String price;
 
-
-    public Fund getFund() {
-        return fund;
+    public String getName() {
+        return name;
     }
 
-    public void setFund(Fund fund) {
-        this.fund = fund;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getShares() {
+    public int getShares() {
         return shares;
     }
 
-    public void setShares(Double shares) {
+    public void setShares(int shares) {
         this.shares = shares;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
-
 }

@@ -13,15 +13,14 @@ public class Constant {
             "username/password combination that you entered";
     public static final String LOGOUT = "You have been successfully logged out";
 
-    // user
-    public static final String INCONSISTENTPASSWORD = "Password inconsistent";
-
     // fund
     public static final String CREATEFUND = "The fund was successfully created";
     public static final String NOFUND = "You don’t have any funds in your Portfolio";
     public static final String BUYFUND = "The fund has been successfully purchased";
+    public static final String SELLFUND = "The shares have been successfully sold";
     public static final String NOTENOUGHCASH = "You don’t have enough cash in your account " +
             "to make this purchase";
+    public static final String NOTENOUGHSHARES = "You don’t have that many shares in your portfolio";
 
     // check
     public static final String DEPOSITCHECK = "The check was successfully deposited";

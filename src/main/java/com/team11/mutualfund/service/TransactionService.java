@@ -35,8 +35,10 @@ public class TransactionService {
             throw new RollbackException(NOTENOUGHCASH);
 
         int shares = (int) (amount / fund.getPrice());
+        // update user cash
         double realamount = shares * fund.getPrice();
         user.setCash(user.getCash() - realamount);
+        // update position
         CustomerFund cf = new CustomerFund(uid, fund.getId());
         Position position = positionDao.findByCustomerFundForUpdate(cf);
         if (position == null) {
@@ -52,24 +54,22 @@ public class TransactionService {
         }
     }
 
-    public void sellFund(long cid, String symbol, double shares) throws RollbackException {
-        User user = userDao.findByIdForUpdate(cid);
+    public void sellFund(long uid, String symbol, int shares) throws RollbackException {
+        User user = userDao.findByIdForUpdate(uid);
         Fund fund = fundDao.findBySymbol(symbol);
-        if (user == null)
-            throw new RollbackException("user id " + String.valueOf(cid) + " does not exist");
-        if (fund == null || !fund.getSymbol().equals(symbol))
-            throw new RollbackException("fund symbol " + String.valueOf(symbol) + " does not exist");
-        CustomerFund cf = new CustomerFund();
-        cf.setCustomerId(cid);
-        cf.setFundId(fund.getId());
+        if (user == null || fund == null)
+            throw new RollbackException();
+        CustomerFund cf = new CustomerFund(uid, fund.getId());
         Position position = positionDao.findByCustomerFundForUpdate(cf);
-        /*
-        if (position == null)
-            throw new RollbackException("user does not have fund " +
-                    String.valueOf(fund.getTicker()));
-        if (position.getShares() < position.getPendingShareDecrease() + shares)
-            throw new RollbackException(NOENOUGHSHARE);
-            */
+        if (position == null || position.getShares() < shares)
+            throw new RollbackException(NOTENOUGHSHARES);
+        // update position
+        position.setShares(position.getShares() - shares);
+        if (position.getShares() == 0)
+            positionDao.delete(position);
+        // update user cash
+        double amount = fund.getPrice() * shares;
+        user.setCash(user.getCash() + amount);
     }
 
     public void requestCheck(String userName, double amount) throws RollbackException {

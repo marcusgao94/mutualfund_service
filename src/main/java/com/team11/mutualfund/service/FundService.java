@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.RollbackException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,19 +32,19 @@ public class FundService {
         fundDao.saveFund(fund);
     }
 
-    // list funds that a customer purchased
-    // todo: need edit
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) {
-        List<Positionvalue> positionvalueList = new LinkedList<>();
+        List<Positionvalue> positionvalueList = new LinkedList();
+        DecimalFormat df = new DecimalFormat("#0.00");
         List<Position> positionList = positionDao.listByCustomerId(cid);
         for (Position p : positionList) {
             Positionvalue pv = new Positionvalue();
-            pv.setFund(p.getFund());
+            pv.setName(p.getFund().getName());
+            pv.setPrice(df.format(p.getFund().getPrice()));
+            pv.setShares(p.getShares());
             positionvalueList.add(pv);
         }
         return positionvalueList;
     }
-
 
 }
 

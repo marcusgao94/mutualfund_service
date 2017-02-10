@@ -94,33 +94,25 @@ public class FundController {
         return new BasicResponse(BUYFUND);
     }
 
-    /*
-    @RequestMapping(value = "sell_fund", method = RequestMethod.POST)
-    public String sellFund(HttpServletRequest request, RedirectAttributes ra,
-                           @Valid SellFundForm sellFundForm, BindingResult result, Model model,
-                           @ModelAttribute("customerPosition") LinkedList<Positionvalue> pv) {
-        if (!checkCustomer(request)) {
-            return "redirect:/customer_login";
-        }
-        result.addAllErrors(sellFundForm.getValidationError());
+    @PostMapping("sellFund")
+    public BasicResponse sellFund(HttpSession session,
+                           @Valid @RequestBody SellFundForm sff, BindingResult result) {
+        if (!checkLogin(session))
+            return new BasicResponse(NOTLOGIN);
+        if (!checkCustomer(session))
+            return new BasicResponse(NOTCUSTOMER);
         if (result.hasErrors())
-            return "sell_fund";
-        SessionUser sessionUser = (SessionUser) request.getSession().getAttribute("sessionUser");
+            return new BasicResponse(ILLEGALINPUT);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         try {
-            transactionService.sellFund(sessionUser.getId(), sellFundForm.getFundTicker(), sellFundForm.getShare());
-        } catch (RollbackException e) {
+            int shares = Integer.valueOf(sff.getNumShares());
+            transactionService.sellFund(sessionUser.getId(), sff.getSymbol(), shares);
+        } catch (Exception e) {
             String message = e.getMessage();
-            if (message.startsWith("customer id"))
-                result.rejectValue("", "0", message);
-            else if (message.startsWith("fund") || message.startsWith("customer does not")) {
-                result.rejectValue("fundTicker", "1", message);
-            }
-            else
-                result.rejectValue("share", "2", message);
-            return "sell_fund";
+            if (e.getMessage().equals(NOTENOUGHSHARES))
+                return new BasicResponse(NOTENOUGHSHARES);
+            return new BasicResponse(ILLEGALINPUT);
         }
-        model.addAttribute("success", "Transaction has been submitted successfully, please wait for the next transition day!");
-        return "success";
+        return new BasicResponse(SELLFUND);
     }
-    */
 }

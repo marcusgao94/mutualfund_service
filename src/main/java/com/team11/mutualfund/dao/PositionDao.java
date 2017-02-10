@@ -16,10 +16,6 @@ public class PositionDao extends AbstractDao<CustomerFund, Position> {
         persist(position);
     }
 
-    public Position findByCustomerFund(CustomerFund cf) {
-        return (Position) getByKey(cf);
-    }
-
     public Position findByCustomerFundForUpdate(CustomerFund cf) {
         Query query = getSession().createQuery(
                 "select p from Position p where " +
@@ -30,22 +26,12 @@ public class PositionDao extends AbstractDao<CustomerFund, Position> {
         return (Position) query.uniqueResult();
     }
 
-    public Position findByCustomerIdFundId(long cid, long fid) {
-        Query query = getSession().createQuery(
-                "select p from Position p where " +
-                        "p.customer.id = :cid and " +
-                        "p.fund.id = :fid"
-        )
-                .setParameter("cid", cid)
-                .setParameter("fid", fid);
-        return (Position) query.uniqueResult();
-    }
-
     @SuppressWarnings("unchecked")
     public List<Position> listByCustomerId(long cid) {
         Query query = getSession().createQuery(
-                "select p from Position p where p.customer.id = :cid"
-        ).setParameter("cid", cid);
+                "select p from Position p where p.user.id = :cid"
+        )
+                .setParameter("cid", cid);
         return (List<Position>) query.list();
     }
 
@@ -53,8 +39,4 @@ public class PositionDao extends AbstractDao<CustomerFund, Position> {
         super.delete(position);
     }
 
-	public List<Position> listByUserName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
