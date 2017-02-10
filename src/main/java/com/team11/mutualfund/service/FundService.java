@@ -31,22 +31,6 @@ public class FundService {
         fundDao.saveFund(fund);
     }
 
-    public Fund getFundBySymbol(String symbol) {
-        return fundDao.findBySymbol(symbol);
-    }
-
-    public void updateFundPrice(long fid, LocalDate date, double price)
-            throws RollbackException {
-        Fund fund = fundDao.findById(fid);
-        if (fund == null)
-            throw new RollbackException(NOFUND);
-    }
-
-    // list all available funds for purchasing
-    public List<Fund> listFund() {
-        return fundDao.listFund();
-    }
-    
     // list funds that a customer purchased
     // todo: need edit
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) {

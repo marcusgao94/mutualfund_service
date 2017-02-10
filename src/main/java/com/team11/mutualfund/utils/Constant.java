@@ -33,6 +33,10 @@ public class Constant {
     // success action
     public static final String SUCCESSACTION = "The action was successful";
 
+    // transition day
+    public static final String TRANSITIONDAY = "The fund prices have been successfully recalculated";
+
+
 
 
 

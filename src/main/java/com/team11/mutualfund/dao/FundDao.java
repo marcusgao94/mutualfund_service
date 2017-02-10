@@ -13,10 +13,6 @@ public class FundDao extends AbstractDao<Long, Fund> {
         persist(fund);
     }
 
-    public Fund findById(long id) {
-        return getByKey(id);
-    }
-
     @SuppressWarnings("unchecked")
     public Fund findBySymbol(String symbol) {
         Query query = getSession().createQuery(
@@ -37,7 +33,7 @@ public class FundDao extends AbstractDao<Long, Fund> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Fund> listFund() {
+    public List<Fund> listFundForUpdate() {
         Query query = getSession().createQuery(
                 "select f from Fund f"
         );
