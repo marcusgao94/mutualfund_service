@@ -10,9 +10,6 @@ public class Positionvalue {
 
     private Double price;
 
-    private Double value;
-
-    private Double available;
 
     public Fund getFund() {
         return fund;
@@ -38,19 +35,4 @@ public class Positionvalue {
         this.price = price;
     }
 
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public Double getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Double available) {
-        this.available = available;
-    }
 }

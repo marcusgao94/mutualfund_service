@@ -8,6 +8,7 @@ public class Constant {
     // login
     public static final String NOTLOGIN = "You are not currently logged in";
     public static final String NOTEMPLOYEE = "You must be an employee to perform this action";
+    public static final String NOTCUSTOMER = "You must be a customer to perform this action";
 
     // user
     public static final String USERNAMELENGTH = "Length of user name must be 1 to 20";
@@ -29,6 +30,7 @@ public class Constant {
             "username/password combination that you entered";
     public static final String LOGOUT = "You have been successfully logged out";
 
+    // cash
     public static final String NOENOUGHCASH = "Cash not enough";
     public static final String TOOLITTLEAMOUNT = "Amount must >= 0.01";
 
@@ -37,7 +39,8 @@ public class Constant {
 
     public static final String NOPOSITION = "This customer does not have this fund";
 
-    public static final String NOFUND = "Fund does not exist";
+    // fund
+    public static final String NOFUND = "You don’t have any funds in your Portfolio";
     public static final String NOFUNDPRICE = "Fund has no price";
     public static final String DUPLICATEFUNDTICKER = "Fund ticker already exists";
     public static final String NOFUNDPRICEHISTORY = "Price of this fund on this date is not set";
@@ -54,6 +57,10 @@ public class Constant {
     // input
     public static final String ILLEGALINPUT = "The input you provided is not valid";
 
+    // success action
+    public static final String SUCCESSACTION = "The action was successful";
+
+
 
 
     public static String sanitize(String s) {
@@ -68,6 +75,11 @@ public class Constant {
     public static boolean checkEmployee(HttpSession session) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         return (sessionUser != null) && sessionUser.getRole().equals("Employee");
+    }
+
+    public static boolean checkCustomer(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        return (sessionUser != null) && sessionUser.getRole().equals("Customer");
     }
 
 }
