@@ -17,11 +17,11 @@ public class FundDao extends AbstractDao<Long, Fund> {
     }
 
     @SuppressWarnings("unchecked")
-    public Fund findByTicker(String ticker) {
+    public Fund findBySymbol(String symbol) {
         Query query = getSession().createQuery(
-                "select f from Fund f where f.ticker = :ticker"
+                "select f from Fund f where f.symbol = :symbol"
         )
-                .setParameter("ticker", ticker);
+                .setParameter("symbol", symbol);
         return (Fund) query.uniqueResult();
     }
 

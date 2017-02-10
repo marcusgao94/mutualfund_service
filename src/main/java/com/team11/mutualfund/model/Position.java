@@ -2,6 +2,7 @@ package com.team11.mutualfund.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Position implements Serializable {
@@ -9,8 +10,8 @@ public class Position implements Serializable {
     @EmbeddedId
     private CustomerFund customerFund;
 
-    @Column(scale = 3)
-    private double shares;
+    @Column(nullable = false)
+    private int shares;
 
     @MapsId("customerId")
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -21,9 +22,6 @@ public class Position implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fund_id", referencedColumnName = "id")
     private Fund fund;
-
-    @Column(scale = 3)
-    private Double pendingShareDecrease = 0d;
 
     public CustomerFund getCustomerFund() {
         return customerFund;
@@ -49,19 +47,13 @@ public class Position implements Serializable {
         this.fund = fund;
     }
 
-    public double getShares() {
+    public int getShares() {
         return shares;
     }
 
-    public void setShares(double shares) {
+    public void setShares(int shares) {
         this.shares = shares;
     }
 
-    public Double getPendingShareDecrease() {
-        return pendingShareDecrease;
-    }
 
-    public void setPendingShareDecrease(Double pendingShareDecrease) {
-        this.pendingShareDecrease = pendingShareDecrease;
-    }
 }

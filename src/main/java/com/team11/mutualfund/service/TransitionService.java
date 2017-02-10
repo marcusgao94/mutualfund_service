@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static com.team11.mutualfund.utils.Constant.*;
-import static com.team11.mutualfund.utils.TransactionType.*;
 
 @Service
 @Transactional
@@ -22,13 +21,7 @@ public class TransitionService {
     private FundDao fundDao;
 
     @Autowired
-    private TransactionDao transactionDao;
-
-    @Autowired
     private TransactionService transactionService;
-
-    @Autowired
-    private FundPriceHistoryDao fundPriceHistoryDao;
 
     @Autowired
     private PositionDao positionDao;
@@ -39,13 +32,7 @@ public class TransitionService {
     @Autowired
     private FundService fundService;
 
-    public LocalDate getLastTransitionDay() {
-        List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
-        if (fundPriceHistoryList == null || fundPriceHistoryList.isEmpty())
-            return null;
-        return fundPriceHistoryList.get(0).getFundDate().getDate();
-    }
-
+    /*
     public void executeBuyFund(LocalDate date) throws RollbackException {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(BUYFUND);
         for (Transaction t : transactionList) {
@@ -157,6 +144,7 @@ public class TransitionService {
         executeBuyFund(date);
         executeSellFund(date);
     }
+    */
 
 
 }

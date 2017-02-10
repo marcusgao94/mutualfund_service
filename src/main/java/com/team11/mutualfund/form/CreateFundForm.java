@@ -10,35 +10,41 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
+import static com.team11.mutualfund.utils.Constant.sanitize;
 
 public class CreateFundForm {
 
-    @NotNull(message = "fund name may not be null")
-    @NotEmpty(message = "fund name may not be empty")
-    private String fundName;
+    @Size(min = 1, max = 20)
+    private String name;
 
-    @NotNull(message = "fund ticker may not be null")
-    @Size(min = 1, max = 5, message = "ticker length must between 1 to 5")
-    @Pattern(regexp = "^[A-Z]*$*", message = "ticker must be Capitalized alphabet")
-    private String fundTicker;
+    @Size(min = 1, max = 5)
+    @Pattern(regexp = "^[A-Z]*$*", message = "symbol must be Capitalized alphabet")
+    private String symbol;
 
-    public String sanitize(String s) {
-        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    @Size(min = 1, max = 20)
+    private String initial_value;
+
+    public String getName() {
+        return name;
     }
 
-    public String getFundName() {
-        return fundName;
+    public void setName(String name) {
+        this.name = sanitize(name);
     }
 
-    public void setFundName(String fundName) {
-        this.fundName = sanitize(fundName);
+    public String getSymbol() {
+        return symbol;
     }
 
-    public String getFundTicker() {
-        return fundTicker;
+    public void setSymbol(String symbol) {
+        this.symbol = sanitize(symbol);
     }
 
-    public void setFundTicker(String fundTicker) {
-        this.fundTicker = sanitize(fundTicker);
+    public String getInitial_value() {
+        return initial_value;
+    }
+
+    public void setInitial_value(String initial_value) {
+        this.initial_value = sanitize(initial_value);
     }
 }

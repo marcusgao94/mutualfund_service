@@ -9,26 +9,12 @@ public class Constant {
     public static final String NOTLOGIN = "You are not currently logged in";
     public static final String NOTEMPLOYEE = "You must be an employee to perform this action";
     public static final String NOTCUSTOMER = "You must be a customer to perform this action";
-
-    // user
-    public static final String USERNAMELENGTH = "Length of user name must be 1 to 20";
-    public static final String NOUSERNAME = "User name does not exist";
-    public static final String FIRSTNAMELENGTH = "Lenght of first name must be 1 to 20";
-    public static final String LASTNAMELENGTH = "Length of last name must be 1 to 20";
-    public static final String ADDRESSLENGTH = "Length of address must be 1 to 50";
-    public static final String CITYLENGTH = "Length of city must be 1 to 20";
-    public static final String STATELENGTH = "Length of state must be 2 to 20";
-    public static final String ZIPLENGTH = "Length of zip must be 5 to 6";
-    public static final String EMAILLENGTH = "Length of email must be 1 to 30";
-    public static final String PASSWORDLENGTH = "Lenght of password must be 1 to 20";
-    public static final String CASHLENGTH = "Lenght of cash must be 1 to 20";
-    public static final String INCONSISTENTPASSWORD = "Password inconsistent";
-    public static final String NOCUSTOMER = "User does not exit";
-
-    // login
     public static final String LOGINERROR = "There seems to be an issue with the " +
             "username/password combination that you entered";
     public static final String LOGOUT = "You have been successfully logged out";
+
+    // user
+    public static final String INCONSISTENTPASSWORD = "Password inconsistent";
 
     // cash
     public static final String NOENOUGHCASH = "Cash not enough";
@@ -40,9 +26,9 @@ public class Constant {
     public static final String NOPOSITION = "This customer does not have this fund";
 
     // fund
+    public static final String CREATEFUND = "The fund was successfully created";
     public static final String NOFUND = "You don’t have any funds in your Portfolio";
-    public static final String NOFUNDPRICE = "Fund has no price";
-    public static final String DUPLICATEFUNDTICKER = "Fund ticker already exists";
+    public static final String DUPLICATEFUNDTICKER = "Fund symbol already exists";
     public static final String NOFUNDPRICEHISTORY = "Price of this fund on this date is not set";
     public static final String DUPLICATEFUNDPRICEHISTORY = "Price of this fund on this date " +
             "has set";

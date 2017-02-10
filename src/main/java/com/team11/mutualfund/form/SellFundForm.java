@@ -12,7 +12,7 @@ import static com.team11.mutualfund.utils.Constant.TOOLITTLESHARE;
 public class SellFundForm {
 
     @NotNull
-    @Size(min = 1, max = 5, message = "fund ticker length must between 1 and 5")
+    @Size(min = 1, max = 5, message = "fund symbol length must between 1 and 5")
     private String fundTicker;
 
     @NotNull(message = "share cannot be empty")

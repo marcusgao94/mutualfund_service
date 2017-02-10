@@ -1,15 +1,18 @@
 package com.team11.mutualfund.controller;
 
 import com.team11.mutualfund.form.BuyFundForm;
+import com.team11.mutualfund.form.CreateFundForm;
 import com.team11.mutualfund.form.SellFundForm;
 import com.team11.mutualfund.model.User;
 import com.team11.mutualfund.model.Fund;
+import com.team11.mutualfund.response.BasicResponse;
 import com.team11.mutualfund.service.UserService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,10 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.team11.mutualfund.utils.Constant.*;
 
 
 @Controller
@@ -32,10 +39,30 @@ public class FundController {
     private FundService fundService;
 
     @Autowired
-    private TransactionService transactionService;
-
-    @Autowired
     private UserService userService;
+
+    @PostMapping("createFund")
+    public BasicResponse createFund(HttpSession session,
+                                    @Valid @RequestBody CreateFundForm cff, BindingResult result) {
+        if (!checkLogin(session))
+            return new BasicResponse(NOTLOGIN);
+        if (!checkEmployee(session))
+            return new BasicResponse(NOTEMPLOYEE);
+        Fund fund = new Fund(cff);
+        try {
+            double initial_value = Double.valueOf(cff.getInitial_value());
+            /*
+            String[] str = ccf.getCash().split(".");
+            if (str.length == 2 && str[1].length() > 2)
+                return new BasicResponse(ILLEGALINPUT);
+            */
+            fund.setPrice(initial_value);
+            fundService.createFund(fund);
+        } catch (NumberFormatException | DataIntegrityViolationException e) {
+            return new BasicResponse(ILLEGALINPUT);
+        }
+        return new BasicResponse(CREATEFUND);
+    }
 
     /*
     @RequestMapping("buy_fund")

@@ -46,10 +46,8 @@ public class UserController {
             double cash = Double.valueOf(ccf.getCash());
             /*
             String[] str = ccf.getCash().split(".");
-            if (str.length == 2 && str[1].length() > 2) {
-                br.setMessage(ILLEGALINPUT);
-                return br;
-            }
+            if (str.length == 2 && str[1].length() > 2)
+                return new BasicResponse(ILLEGALINPUT);
             */
             user.setCash(cash);
             userService.createCustomer(user);
@@ -61,7 +59,7 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public BasicResponse login(HttpServletRequest request,
-                                       @Valid @RequestBody LoginForm loginForm, BindingResult result) {
+                               @Valid @RequestBody LoginForm loginForm, BindingResult result) {
         if (result.hasErrors())
             return new BasicResponse(LOGINERROR);
         User u = userService.getUserByUserName(loginForm.getUsername());

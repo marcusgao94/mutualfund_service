@@ -12,9 +12,9 @@ import static com.team11.mutualfund.utils.Constant.TOOLITTLEAMOUNT;
 
 public class BuyFundForm {
 
-    @NotNull(message = "fund ticker may not be null")
-    @Size(min = 1, max = 5, message = "fund ticker length must between 1 and 5")
-    @Pattern(regexp = "^[A-Z]*$*", message = "ticker must be Capitalized alphabet")
+    @NotNull(message = "fund symbol may not be null")
+    @Size(min = 1, max = 5, message = "fund symbol length must between 1 and 5")
+    @Pattern(regexp = "^[A-Z]*$*", message = "symbol must be Capitalized alphabet")
     private String fundTicker;
 
     @NotNull(message = "amount cannot be empty")

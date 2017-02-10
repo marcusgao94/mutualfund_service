@@ -11,6 +11,7 @@ import com.team11.mutualfund.form.CreateFundForm;
 
 @Entity
 public class Fund implements Serializable {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -19,13 +20,15 @@ public class Fund implements Serializable {
     private String name;
 
     @Column(unique = true, nullable = false)
-    private String ticker;
+    private String symbol;
+
+    @Column(nullable = false, columnDefinition = "decimal(20, 2)")
+    private double price;
 
     public Fund() {}
-
-    public Fund(CreateFundForm ff) {
-        setName(ff.getFundName());
-        setTicker(ff.getFundTicker());
+    public Fund(CreateFundForm cff) {
+        setName(cff.getName());
+        setSymbol(cff.getSymbol());
     }
 
     public Long getId() {
@@ -36,12 +39,12 @@ public class Fund implements Serializable {
         this.id = id;
     }
 
-    public String getTicker() {
-        return ticker;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getName() {
@@ -50,5 +53,13 @@ public class Fund implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
