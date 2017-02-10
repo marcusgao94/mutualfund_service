@@ -26,16 +26,30 @@ public class TransactionService {
     private PositionDao positionDao;
 
     public void buyFund(long uid, String symbol, double amount) throws RollbackException {
-        User user = userDao.findById(uid);
+        User user = userDao.findByIdForUpdate(uid);
         Fund fund = fundDao.findBySymbolForUpdate(symbol);
         if (user == null || fund == null)
             throw new RollbackException();
-        /*
-        if (user.getCash() < user.getPendingCashDecrease() + amount)
-            throw new RollbackException(NOENOUGHCASH);
+        // todo: maybe need edit
+        if (user.getCash() < amount)
+            throw new RollbackException(NOTENOUGHCASH);
 
-        user.setPendingCashDecrease(user.getPendingCashDecrease() + amount);
-        */
+        int shares = (int) (amount / fund.getPrice());
+        double realamount = shares * fund.getPrice();
+        user.setCash(user.getCash() - realamount);
+        CustomerFund cf = new CustomerFund(uid, fund.getId());
+        Position position = positionDao.findByCustomerFundForUpdate(cf);
+        if (position == null) {
+            position = new Position();
+            position.setCustomerFund(cf);
+            position.setShares(shares);
+            position.setUser(user);
+            position.setFund(fund);
+            positionDao.save(position);
+        }
+        else {
+            position.setShares(position.getShares() + shares);
+        }
     }
 
     public void sellFund(long cid, String symbol, double shares) throws RollbackException {

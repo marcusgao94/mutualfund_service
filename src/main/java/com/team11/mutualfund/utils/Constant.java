@@ -20,12 +20,14 @@ public class Constant {
     public static final String CREATEFUND = "The fund was successfully created";
     public static final String NOFUND = "You don’t have any funds in your Portfolio";
     public static final String BUYFUND = "The fund has been successfully purchased";
+    public static final String NOTENOUGHCASH = "You don’t have enough cash in your account " +
+            "to make this purchase";
 
     // check
     public static final String DEPOSITCHECK = "The check was successfully deposited";
     public static final String REQUESTCHECK = "The check has been successfully requested";
-    public static final String NOTENOUGHREQUEST = "You don’t have sufficient funds in your account to " +
-            "cover the requested check";
+    public static final String NOTENOUGHREQUEST = "You don’t have sufficient funds in your " +
+            "account to cover the requested check";
 
     // input
     public static final String ILLEGALINPUT = "The input you provided is not valid";

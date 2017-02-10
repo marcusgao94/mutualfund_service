@@ -3,10 +3,7 @@ package com.team11.mutualfund.controller;
 import com.team11.mutualfund.response.BasicResponse;
 import com.team11.mutualfund.service.TransitionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +13,6 @@ import static com.team11.mutualfund.utils.Constant.*;
 
 @RestController
 public class TransitionController {
-
 
     @Autowired
     private TransitionService transitionService;

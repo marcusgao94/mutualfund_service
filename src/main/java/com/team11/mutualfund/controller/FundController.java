@@ -87,56 +87,14 @@ public class FundController {
             */
             transactionService.buyFund(sessionUser.getId(), bff.getSymbol(), cash);
         } catch (Exception e) {
+            if (e.getMessage().equals(NOTENOUGHCASH))
+                return new BasicResponse(NOTENOUGHCASH);
             return new BasicResponse(ILLEGALINPUT);
         }
         return new BasicResponse(BUYFUND);
     }
 
     /*
-    @RequestMapping(value = "buy_fund", method = RequestMethod.POST)
-    public String buyFund(HttpServletRequest request, RedirectAttributes ra,
-                          @ModelAttribute("customerPosition") LinkedList<Positionvalue> pv,
-                          @ModelAttribute("fundList") LinkedList<Fund> fundList,
-                          @Valid BuyFundForm buyFundForm, BindingResult result, Model model) {
-        if (!checkCustomer(request)) {
-            return "redirect:/customer_login";
-        }
-        result.addAllErrors(buyFundForm.getValidationError());
-        if (result.hasErrors())
-            return "buy_fund";
-        SessionUser sessionUser = (SessionUser) request.getSession().getAttribute("sessionUser");
-        User c = userService.getCustomerByUserName(sessionUser.getUserName());
-        try {
-            transactionService.buyFund(sessionUser.getId(), buyFundForm.getFundTicker(),
-                buyFundForm.getAmount());
-        } catch (RollbackException e) {
-            String message = e.getMessage();
-            if (message.startsWith("customer"))
-                result.rejectValue("", "0", message);
-            else if (message.startsWith("fund"))
-                result.rejectValue("fundTicker", "", message);
-            else
-                result.rejectValue("amount", "", message);
-            return "buy_fund";
-        }
-        model.addAttribute("success", "Transaction has been submitted successfully, please wait for the next transition day!");
-        return "success";
-    }
-
-    @RequestMapping("sell_fund")
-    public String sellFund(HttpServletRequest request, RedirectAttributes ra, Model model) {
-        if (!checkCustomer(request)) {
-            return "redirect:/customer_login";
-        }
-        SessionUser sessionUser = (SessionUser) request.getSession().getAttribute("sessionUser");
-        User c = userService.getCustomerByUserName(sessionUser.getUserName());
-        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
-        model.addAttribute("customerPosition", pv);
-        SellFundForm sellFundForm = new SellFundForm();
-        model.addAttribute("sellFundForm", sellFundForm);
-        return "sell_fund";
-    }
-
     @RequestMapping(value = "sell_fund", method = RequestMethod.POST)
     public String sellFund(HttpServletRequest request, RedirectAttributes ra,
                            @Valid SellFundForm sellFundForm, BindingResult result, Model model,
