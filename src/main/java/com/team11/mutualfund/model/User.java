@@ -43,7 +43,7 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private String zip;
 
-	@Column(nullable=false, columnDefinition = "decimal(20, 2)")
+	@Column(nullable=false, columnDefinition = "decimal(60, 2)")
 	private Double cash = 0d;
 
 	@Column(nullable = false)

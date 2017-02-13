@@ -22,7 +22,7 @@ public class Fund implements Serializable {
     @Column(unique = true, nullable = false)
     private String symbol;
 
-    @Column(nullable = false, columnDefinition = "decimal(20, 2)")
+    @Column(nullable = false, columnDefinition = "decimal(60, 2)")
     private double price;
 
     public Fund() {}

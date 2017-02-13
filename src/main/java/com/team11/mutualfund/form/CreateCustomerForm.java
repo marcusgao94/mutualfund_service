@@ -1,5 +1,7 @@
 package com.team11.mutualfund.form;
 
+import javafx.scene.SceneAntialiasing;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,7 +60,7 @@ public class CreateCustomerForm {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = sanitize(username);
     }
 
     public String getPassword() {
@@ -66,7 +68,7 @@ public class CreateCustomerForm {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = sanitize(password);
     }
 
     public String getFname() {
@@ -74,7 +76,7 @@ public class CreateCustomerForm {
     }
 
     public void setFname(String fname) {
-        this.fname = fname;
+        this.fname = sanitize(fname);
     }
 
     public String getLname() {
@@ -82,7 +84,7 @@ public class CreateCustomerForm {
     }
 
     public void setLname(String lname) {
-        this.lname = lname;
+        this.lname = sanitize(lname);
     }
 
     public String getEmail() {
@@ -90,7 +92,7 @@ public class CreateCustomerForm {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = sanitize(email);
     }
 
     public String getAddress() {
@@ -98,7 +100,7 @@ public class CreateCustomerForm {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = sanitize(address);
     }
 
     public String getCity() {
@@ -106,7 +108,7 @@ public class CreateCustomerForm {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = sanitize(city);
     }
 
     public String getState() {
@@ -114,7 +116,7 @@ public class CreateCustomerForm {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = sanitize(state);
     }
 
     public String getZip() {
@@ -122,7 +124,7 @@ public class CreateCustomerForm {
     }
 
     public void setZip(String zip) {
-        this.zip = zip;
+        this.zip = sanitize(zip);
     }
 
     public String getCash() {
@@ -130,6 +132,6 @@ public class CreateCustomerForm {
     }
 
     public void setCash(String cash) {
-        this.cash = cash;
+        this.cash = sanitize(cash);
     }
 }

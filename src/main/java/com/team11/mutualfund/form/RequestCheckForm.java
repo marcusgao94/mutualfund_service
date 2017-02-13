@@ -8,7 +8,7 @@ import static com.team11.mutualfund.utils.Constant.sanitize;
 public class RequestCheckForm {
 
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 60)
     private String cashValue;
 
     public String getCashValue() {

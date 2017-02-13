@@ -32,6 +32,21 @@ public class UserController {
     @Autowired
     private FundService fundService;
 
+    public static boolean checkLogin(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        return sessionUser != null;
+    }
+
+    public static boolean checkEmployee(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        return (sessionUser != null) && sessionUser.getRole().equals("Employee");
+    }
+
+    public static boolean checkCustomer(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        return (sessionUser != null) && sessionUser.getRole().equals("Customer");
+    }
+
     @PostMapping("/createCustomerAccount")
     public BasicResponse createCustomer(HttpSession session,
                                         @Valid @RequestBody CreateCustomerForm ccf, BindingResult result) {

@@ -10,11 +10,11 @@ import static com.team11.mutualfund.utils.Constant.sanitize;
 public class LoginForm {
 
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 200)
     private String username;
 
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 200)
     private String password;
 
     public String getUsername() {

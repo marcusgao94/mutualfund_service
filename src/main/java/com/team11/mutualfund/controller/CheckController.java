@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import static com.team11.mutualfund.controller.UserController.*;
 import static com.team11.mutualfund.utils.Constant.*;
 
 @RestController

@@ -10,7 +10,7 @@ import static com.team11.mutualfund.utils.Constant.sanitize;
 public class CreateFundForm {
 
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 200)
     private String name;
 
     @NotNull
@@ -19,7 +19,7 @@ public class CreateFundForm {
     private String symbol;
 
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 60)
     private String initial_value;
 
     public String getName() {

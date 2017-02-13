@@ -6,30 +6,19 @@ import com.team11.mutualfund.form.SellFundForm;
 import com.team11.mutualfund.model.User;
 import com.team11.mutualfund.model.Fund;
 import com.team11.mutualfund.response.BasicResponse;
-import com.team11.mutualfund.service.UserService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
-import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.RollbackException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import java.text.ParseException;
-import java.util.DoubleSummaryStatistics;
-import java.util.LinkedList;
-import java.util.List;
 
+import static com.team11.mutualfund.controller.UserController.*;
 import static com.team11.mutualfund.utils.Constant.*;
 
 @RestController

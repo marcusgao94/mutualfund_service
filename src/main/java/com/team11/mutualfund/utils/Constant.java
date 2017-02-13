@@ -39,25 +39,8 @@ public class Constant {
 
 
 
-
-
     public static String sanitize(String s) {
         return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
-    }
-
-    public static boolean checkLogin(HttpSession session) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        return sessionUser != null;
-    }
-
-    public static boolean checkEmployee(HttpSession session) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        return (sessionUser != null) && sessionUser.getRole().equals("Employee");
-    }
-
-    public static boolean checkCustomer(HttpSession session) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        return (sessionUser != null) && sessionUser.getRole().equals("Customer");
     }
 
 }
