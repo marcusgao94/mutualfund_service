@@ -2,10 +2,7 @@ package com.team11.mutualfund.model;
 
 import com.team11.mutualfund.form.CreateCustomerForm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -16,7 +13,7 @@ import static com.team11.mutualfund.utils.Constant.*;
 public class User implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(nullable = false, unique = true)
