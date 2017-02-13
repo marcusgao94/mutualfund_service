@@ -14,7 +14,7 @@ public class BuyFundForm {
     private String symbol;
 
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 60)
     private String cashValue;
 
     public String getSymbol() {
