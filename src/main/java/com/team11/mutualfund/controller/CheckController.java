@@ -33,6 +33,8 @@ public class CheckController {
             return new BasicResponse(ILLEGALINPUT);
         try {
             double cash = Double.valueOf(dcf.getCash());
+            if (cash <= 0)
+                return new BasicResponse(ILLEGALINPUT);
             /*
             String[] str = ccf.getCash().split(".");
             if (str.length == 2 && str[1].length() > 2)
@@ -57,6 +59,8 @@ public class CheckController {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         try {
             double cash = Double.valueOf(rcf.getCashValue());
+            if (cash <= 0)
+                return new BasicResponse(ILLEGALINPUT);
             /*
             String[] str = ccf.getCash().split(".");
             if (str.length == 2 && str[1].length() > 2)
