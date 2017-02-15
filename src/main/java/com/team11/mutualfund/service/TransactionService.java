@@ -30,11 +30,11 @@ public class TransactionService {
         Fund fund = fundDao.findBySymbolForUpdate(symbol);
         if (user == null || fund == null)
             throw new RollbackException();
-        // todo: maybe need edit
         if (user.getCash() < amount)
-            throw new RollbackException(NOTENOUGHCASH);
-
+            throw new RollbackException(NOTENOUGHCASHACCOUNT);
         int shares = (int) (amount / fund.getPrice());
+        if (shares < 1)
+            throw new RollbackException(NOTENOUGHCASHPROVIDED);
         // update user cash
         double realamount = shares * fund.getPrice();
         user.setCash(user.getCash() - realamount);

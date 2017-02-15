@@ -18,8 +18,10 @@ public class Constant {
     public static final String NOFUND = "You don’t have any funds in your Portfolio";
     public static final String BUYFUND = "The fund has been successfully purchased";
     public static final String SELLFUND = "The shares have been successfully sold";
-    public static final String NOTENOUGHCASH = "You don’t have enough cash in your account " +
-            "to make this purchase";
+    public static final String NOTENOUGHCASHACCOUNT = "You don’t have enough cash in your " +
+            "account to make this purchase";
+    public static final String NOTENOUGHCASHPROVIDED = "You didn’t provide enough cash to make " +
+            "this purchase";
     public static final String NOTENOUGHSHARES = "You don’t have that many shares in your portfolio";
 
     // check

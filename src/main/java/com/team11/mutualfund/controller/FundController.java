@@ -43,6 +43,9 @@ public class FundController {
         Fund fund = new Fund(cff);
         try {
             double initial_value = Double.valueOf(cff.getInitial_value());
+            // check value > 0
+            if (initial_value <= 0)
+                return new BasicResponse(ILLEGALINPUT);
             /*
             String[] str = ccf.getCash().split(".");
             if (str.length == 2 && str[1].length() > 2)
@@ -69,6 +72,8 @@ public class FundController {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         try {
             double cash = Double.valueOf(bff.getCashValue());
+            if (cash <= 0)
+                return new BasicResponse(ILLEGALINPUT);
             /*
             String[] str = ccf.getCash().split(".");
             if (str.length == 2 && str[1].length() > 2)
@@ -76,8 +81,10 @@ public class FundController {
             */
             transactionService.buyFund(sessionUser.getId(), bff.getSymbol(), cash);
         } catch (Exception e) {
-            if (e.getMessage().equals(NOTENOUGHCASH))
-                return new BasicResponse(NOTENOUGHCASH);
+            String message = e.getMessage();
+            if (message.equals(NOTENOUGHCASHACCOUNT) ||
+                    message.equals(NOTENOUGHCASHPROVIDED))
+                return new BasicResponse(message);
             return new BasicResponse(ILLEGALINPUT);
         }
         return new BasicResponse(BUYFUND);
@@ -95,6 +102,8 @@ public class FundController {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         try {
             int shares = Integer.valueOf(sff.getNumShares());
+            if (shares <= 0)
+                return new BasicResponse(ILLEGALINPUT);
             transactionService.sellFund(sessionUser.getId(), sff.getSymbol(), shares);
         } catch (Exception e) {
             String message = e.getMessage();
