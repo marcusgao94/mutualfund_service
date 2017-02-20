@@ -2,10 +2,7 @@ package com.team11.mutualfund.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.team11.mutualfund.form.CreateFundForm;
 
@@ -13,7 +10,7 @@ import com.team11.mutualfund.form.CreateFundForm;
 public class Fund implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

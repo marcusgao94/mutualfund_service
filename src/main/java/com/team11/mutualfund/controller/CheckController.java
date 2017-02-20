@@ -35,11 +35,9 @@ public class CheckController {
             double cash = Double.valueOf(dcf.getCash());
             if (cash <= 0)
                 return new BasicResponse(ILLEGALINPUT);
-            /*
-            String[] str = ccf.getCash().split(".");
+            String[] str = dcf.getCash().split("\\.");
             if (str.length == 2 && str[1].length() > 2)
                 return new BasicResponse(ILLEGALINPUT);
-            */
             transactionService.depositCheck(dcf.getUsername(), cash);
         } catch (Exception e) {
             return new BasicResponse(ILLEGALINPUT);
@@ -61,11 +59,9 @@ public class CheckController {
             double cash = Double.valueOf(rcf.getCashValue());
             if (cash <= 0)
                 return new BasicResponse(ILLEGALINPUT);
-            /*
-            String[] str = ccf.getCash().split(".");
+            String[] str = rcf.getCashValue().split("\\.");
             if (str.length == 2 && str[1].length() > 2)
                 return new BasicResponse(ILLEGALINPUT);
-            */
             transactionService.requestCheck(sessionUser.getUsername(), cash);
         } catch (NumberFormatException e) {
             return new BasicResponse(ILLEGALINPUT);

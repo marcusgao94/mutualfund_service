@@ -46,11 +46,9 @@ public class FundController {
             // check value > 0
             if (initial_value <= 0)
                 return new BasicResponse(ILLEGALINPUT);
-            /*
-            String[] str = ccf.getCash().split(".");
+            String[] str = cff.getInitial_value().split("\\.");
             if (str.length == 2 && str[1].length() > 2)
                 return new BasicResponse(ILLEGALINPUT);
-            */
             fund.setPrice(initial_value);
             fundService.createFund(fund);
         } catch (Exception e) {
@@ -74,11 +72,9 @@ public class FundController {
             double cash = Double.valueOf(bff.getCashValue());
             if (cash <= 0)
                 return new BasicResponse(ILLEGALINPUT);
-            /*
-            String[] str = ccf.getCash().split(".");
+            String[] str = bff.getCashValue().split("\\.");
             if (str.length == 2 && str[1].length() > 2)
                 return new BasicResponse(ILLEGALINPUT);
-            */
             transactionService.buyFund(sessionUser.getId(), bff.getSymbol(), cash);
         } catch (Exception e) {
             String message = e.getMessage();
@@ -103,6 +99,9 @@ public class FundController {
         try {
             int shares = Integer.valueOf(sff.getNumShares());
             if (shares <= 0)
+                return new BasicResponse(ILLEGALINPUT);
+            String[] str = sff.getNumShares().split("\\.");
+            if (str.length > 1)
                 return new BasicResponse(ILLEGALINPUT);
             transactionService.sellFund(sessionUser.getId(), sff.getSymbol(), shares);
         } catch (Exception e) {

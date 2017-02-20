@@ -61,13 +61,11 @@ public class UserController {
         User user = new User(ccf);
         try {
             double cash = Double.valueOf(ccf.getCash());
-            if (cash <= 0)
+            if (cash < 0)
                 return new BasicResponse(ILLEGALINPUT);
-            /*
-            String[] str = ccf.getCash().split(".");
+            String[] str = ccf.getCash().split("\\.");
             if (str.length == 2 && str[1].length() > 2)
                 return new BasicResponse(ILLEGALINPUT);
-            */
             user.setCash(cash);
             userService.createCustomer(user);
         } catch (NumberFormatException | DataIntegrityViolationException e) {
