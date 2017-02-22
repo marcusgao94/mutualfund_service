@@ -14,8 +14,7 @@ public class CreateFundForm {
     private String name;
 
     @NotNull
-    @Size(min = 1, max = 5)
-    @Pattern(regexp = "^[A-Z]*$*", message = "symbol must be Capitalized alphabet")
+    @Size(min = 1, max = 200)
     private String symbol;
 
     @NotNull

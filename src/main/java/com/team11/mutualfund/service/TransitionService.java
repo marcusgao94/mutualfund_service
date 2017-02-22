@@ -22,7 +22,6 @@ public class TransitionService {
         List<Fund> fundList = fundDao.listFundForUpdate();
         Random random = new Random();
         for (Fund fund : fundList) {
-            // todo: check new price > 0( need to > 0.01 because in database keeps two digits)
             int sign = random.nextInt(2) * 2 - 1;
             double fluctuate = random.nextDouble() / 10;
             double change = 1 + sign * fluctuate;

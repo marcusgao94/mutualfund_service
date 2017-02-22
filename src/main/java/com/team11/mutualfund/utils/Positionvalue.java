@@ -6,7 +6,7 @@ public class Positionvalue {
 
     private String name;
 
-    private int shares;
+    private String shares;
 
     private String price;
 
@@ -18,11 +18,11 @@ public class Positionvalue {
         this.name = name;
     }
 
-    public int getShares() {
+    public String getShares() {
         return shares;
     }
 
-    public void setShares(int shares) {
+    public void setShares(String shares) {
         this.shares = shares;
     }
 

@@ -40,7 +40,7 @@ public class FundService {
             Positionvalue pv = new Positionvalue();
             pv.setName(p.getFund().getName());
             pv.setPrice(df.format(p.getFund().getPrice()));
-            pv.setShares(p.getShares());
+            pv.setShares(String.valueOf(p.getShares()));
             positionvalueList.add(pv);
         }
         return positionvalueList;
